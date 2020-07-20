@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dash-front-service
+spec:
+  selector:
+    app: dash-front
+  ports:
+    - port: 80

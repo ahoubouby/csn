@@ -1,0 +1,41 @@
+/**
+ * @author K.ELBAGUARI
+ */
+:host /deep/ ng2-smart-table thead > tr > th {
+    background-color: #dbdcdd !important;
+    font-family: Open Sans, sans-serif !important;
+    font-size: 0.8rem !important;
+    font-weight: 200 !important;
+    line-height: 0.1rem !important;
+    color: #192038 !important;
+}
+
+:host /deep/ ng2-smart-table table tr td {
+    position: relative;
+    padding: 0.5rem 1rem;
+    border: 1px solid #edf1f7;
+    vertical-align: middle;
+}
+
+:host /deep/  ng2-smart-table nav.ng2-smart-pagination-nav {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+ :host /deep/ span.btn.btn-info.btn-icon {
+    color: #fff;
+    background-color: #0095ff !important;
+    border-color: #0095ff !important;
+}
+ :host /deep/ span.btn.btn-info.btn-icon:hover {
+    color: #fff;
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+}
+
+:host /deep/ ng2-smart-table table tr td.ng2.smart-title .nombre {
+  width: 50px !important;
+}

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard-csn-job-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard-csn-job-service
+  template:
+    metadata:
+      labels:
+        app: dashboard-csn-job-service
+    spec:
+      containers:
+        - name: dashboard-csn-job-service
+          image: sal-container-registry.k8s-dev.iamdg.net.ma/dashboard_csn_job:0.0.0-int-1.0
+
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "1Gi"
+            requests:
+              memory: "1Gi"
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: regcred

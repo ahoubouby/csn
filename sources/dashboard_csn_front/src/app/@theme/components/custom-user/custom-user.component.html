@@ -1,0 +1,10 @@
+<!-- @author K.ELBAGUARI && O.SLAAOUITER -->
+<div class="user-container">
+  <div class="info-container">
+    <div *ngIf="showName && name" class="user-name">{{ name }}</div>
+    <div *ngIf="showTitle && title" class="user-title">{{ title }}</div>
+  </div>&nbsp;&nbsp;
+  <div class="user-picture image" [style.background-image]="imageBackgroundStyle" (click)="logoutApp()">
+    <nb-badge *ngIf="badgeText" [text]="badgeText" [status]="badgeStatus" [position]="badgePosition"></nb-badge>
+  </div>
+</div>

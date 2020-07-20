@@ -1,0 +1,82 @@
+/**
+ * @author K.ELBAGUARI && O.SLAAOUITER
+ */
+@font-face {
+  font-family: 'RobotoCondensed-Regular';
+  src: url('/assets/fonts/ttfs/RobotoCondensed-Regular.ttf');
+}
+@font-face {
+  font-family: 'halflings-regular';
+  src: url('/assets/fonts/ttfs/glyphicons-halflings-regular.ttf');
+}
+@font-face {
+  font-family: 'RobotoCondensed-Bold';
+  src: url('/assets/fonts/ttfs/RobotoCondensed-Bold.ttf');
+}
+@font-face {
+  font-family: 'RobotoCondensed-BoldItalic';
+  src: url('/assets/fonts/ttfs/RobotoCondensed-BoldItalic.ttf');
+}
+@font-face {
+  font-family: 'RobotoCondensed-Italic';
+  src: url('/assets/fonts/ttfs/RobotoCondensed-Italic.ttf');
+}
+@font-face {
+  font-family: 'RobotoCondensed-Light';
+  src: url('/assets/fonts/ttfs/RobotoCondensed-Light.ttf');
+}
+@font-face {
+  font-family: 'RobotoCondensed-LightItalic';
+  src: url('/assets/fonts/ttfs/RobotoCondensed-LightItalic.ttf');
+}
+.mt-title {
+  text-transform: uppercase;
+  font-family: 'RobotoCondensed-Bold';
+  color: #505050;
+}
+.mt-label {
+  font-family: 'halflings-regular' !important;
+  font-size: 14px !important;
+  color: #616875 !important;
+}
+.mt-btn {
+  color: #fff !important;
+  font-family: 'RobotoCondensed-Bold' !important;
+  font-size: 14px !important;
+  text-transform: uppercase !important;
+  padding: 10px 20px 9px !important;
+  -webkit-transition: all 0.3s ease !important;
+  -moz-transition: all 0.3s ease !important;
+  -ms-transition: all 0.3s ease !important;
+  -o-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
+}
+.mt-btn-primary {
+  background: #337ab7 !important;
+  border: 1px solid #2e6da4 !important;
+}
+.mt-btn-primary:hover {
+  background: #5a9fda !important;
+  border: 1px solid #5a9fda !important;
+}
+.mt-btn-danger {
+  background-color: #f44336 !important;
+  border-color: 1px solid #f44336 !important;
+}
+.mt-btn-danger:hover {
+  background: #f37066 !important;
+  border: 1px solid #f37066 !important;
+}
+.dashboard_csn-btn {
+  color: #fff !important;
+  font-family: 'RobotoCondensed-Bold' !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  padding: 5px 15px !important;
+  -webkit-transition: all 0.3s ease !important;
+  -moz-transition: all 0.3s ease !important;
+  -ms-transition: all 0.3s ease !important;
+  -o-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
+  min-width: 50px;
+}

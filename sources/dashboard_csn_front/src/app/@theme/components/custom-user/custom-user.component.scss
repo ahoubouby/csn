@@ -1,0 +1,35 @@
+/**
+ * @author K.ELBAGUARI && O.SLAAOUITER
+ */
+.user-picture {
+  border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  flex-shrink: 0;
+  background-color: transparent;
+  border: 1px solid #edf1f7;
+  height: 1.7rem;
+  width: 1.7rem;
+  cursor: pointer;
+}
+.user-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info-container {
+  margin-left: 0.5rem;
+}
+.user-name {
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+  color: #192038;
+  font-family: Open Sans, sans-serif;
+  font-weight: 400;
+}

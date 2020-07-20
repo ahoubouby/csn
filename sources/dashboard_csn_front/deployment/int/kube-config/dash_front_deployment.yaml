@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dash-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dash-front
+  template:
+    metadata:
+      labels:
+        app: dash-front
+    spec:
+      containers:
+      - name: dash-front
+        image: sal-container-registry.k8s-dev.iamdg.net.ma/dash_front:0.0.0-int-1.0
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "1Gi"
+          requests:
+            memory: "1Gi"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: regcred

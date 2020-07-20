@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gdos-front-service
+spec:
+  selector:
+    app: gdos-front
+  ports:
+    - port: 80

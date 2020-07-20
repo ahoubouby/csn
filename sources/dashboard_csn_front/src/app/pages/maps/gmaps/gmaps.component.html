@@ -1,0 +1,243 @@
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card nbSpinnerStatus="primary" class="gmapsCard">
+      <!-- <nb-card-header>
+        <div class="row">
+          <div class="col-sm-3 mt-title">Carte des équipements Hors Service</div>
+          <div class="col-sm-2 mt-title">
+            <nb-toggle [(ngModel)]="vueSatellite">Vue Satellite</nb-toggle>
+          </div>
+          <div class="col-sm-2 mt-title">
+            <nb-toggle (checkedChange)="toggleCluster($event)">Regrouper</nb-toggle>
+          </div>
+        </div>
+      </nb-card-header> -->
+      <nb-card-body>
+        <!-- <nb-accordion>
+          <nb-accordion-item #filterItem [expanded]=true>
+            <nb-accordion-item-body>
+              <form [formGroup]="gmapFilterForm" (ngSubmit)="onSubmitFilter()">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row no-bottom-margin">
+                      <label class="label col-sm-3 col-form-label mt-label">DR</label>
+                      <div class="col-sm-9">
+                        <nb-select formControlName="selectedDR" size="small" (selectedChange)="changeDR($event)">
+                          <nb-option value="">Tous</nb-option>
+                          <nb-option *ngFor="let dr of listDR" value="{{dr}}">{{dr}}</nb-option>
+                        </nb-select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row no-bottom-margin">
+                      <label class="label col-sm-3 col-form-label mt-label">DC</label>
+                      <div class="col-sm-9">
+                        <nb-select formControlName="selectedDC" size="small">
+                          <nb-option value="">Tous</nb-option>
+                          <nb-option *ngFor="let dc of listDC" value="{{dc}}">{{dc}}</nb-option>
+                        </nb-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row no-bottom-margin">
+                      <label class="label col-sm-3 col-form-label mt-label">Fournisseur</label>
+                      <div class="col-sm-9">
+                        <nb-select formControlName="selectedFournisseur" size="small">
+                          <nb-option value="">Tous</nb-option>
+                          <nb-option *ngFor="let f of listFournisseurs" value="{{f}}">{{f}}</nb-option>
+                        </nb-select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row no-bottom-margin">
+                      <label class="label col-sm-3 col-form-label mt-label">Technologie</label>
+                      <div class="col-sm-9">
+                        <nb-select formControlName="selectedTechnologie" size="small">
+                          <nb-option value="">Tous</nb-option>
+                          <nb-option *ngFor="let t of listTechnologies" value="{{t}}">{{t}}</nb-option>
+                        </nb-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"></div>
+                  <div class="col-md-6 text-right">
+                    <button type="submit" nbButton status="primary" class="dashboard_csn-btn mt-btn-primary"
+                      size="small">
+                      <nb-icon icon="search"></nb-icon>Chercher
+                    </button>
+                  </div>
+                </div>
+              </form> 
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+        </nb-accordion>-->
+        <div class="row" style="margin:9px 0;">
+          <div class="col-sm-12 text-center text-primary bold">Nombre des HS : <span
+              style="color:#FF0000;">{{equipements?.length}}</span></div>
+        </div>
+        <div class="row" style="margin-top:0;">
+          <div class="col-md-11">
+            <agm-map #gm [latitude]="lat" [longitude]="lng" [zoom]="zoom" [styles]="style"
+              mapTypeId="{{vueSatellite?'hybrid':'roadmap'}}">
+              <agm-polyline [strokeColor]="'#969695'" [strokeOpacity]="1" [strokeWeight]="1">
+                <agm-polyline-point *ngFor="let point of polylinesMaroc" [latitude]="point.lat" [longitude]="point.lng">
+                </agm-polyline-point>
+              </agm-polyline>
+              <agm-marker-cluster [maxZoom]="clusterMaxZoom" [styles]="styles" [calculator]="clusterCalculator">
+                <agm-marker *ngFor="let eq of equipements" [latitude]="eq.latitude" [longitude]="eq.longitude"
+                  [iconUrl]="
+                  {
+                    url: getMarkerIcon(),
+                    scaledSize: {
+                        width: 15,
+                        height: 15
+                    }
+                }
+              ">
+                  <agm-info-window>
+                    <div style="min-width:360px;">
+                      <div class="row" style="margin-bottom:9px;">
+                        <div class="col-md-12">
+                          <span style="font-weight: bold;">DR :</span> {{eq.dr}}
+                        </div>
+                      </div>
+                      <div class="row" style="margin-bottom:9px;">
+                        <div class="col-md-12">
+                          <span style="font-weight: bold;">DC :</span> {{eq.dc}}
+                        </div>
+                      </div>
+                      <div class="row" style="margin-bottom:9px;">
+                        <div class="col-md-12">
+                          <span style="font-weight: bold;">Description : </span> {{eq.description}}
+                        </div>
+                      </div>
+                      <div class="row" style="margin-bottom:9px;">
+                        <div class="col-md-6">
+                          <span style="font-weight: bold;">Fournisseur :</span> {{eq.fournisseur}}
+                        </div>
+                        <div class="col-md-6">
+                          <span style="font-weight: bold;">Technologie :</span> {{eq.technologie}}
+                        </div>
+                      </div>
+                      <div class="row" style="margin-bottom:9px;">
+                        <div class="col-md-6">
+                          <span style="font-weight: bold;">Infrastructure :</span> {{eq.infrastructure}}
+                        </div>
+                      </div>
+                      <!-- <div class="row" style="margin-bottom:9px;">
+                        <div class="col-md-6">
+                          <span style="font-weight: bold;">Latitude : </span> {{eq.latitude}}
+                        </div>
+                        <div class="col-md-6">
+                          <span style="font-weight: bold;">Longitude : </span> {{eq.longitude}}
+                        </div>
+                      </div> -->
+                      <div class="row" style="margin-bottom:9px;">
+                        <div class="col-md-6">
+                          <span style="font-weight: bold;">Date Début :</span><br />{{eq.datedebut}}
+                        </div>
+                        <div class="col-md-6">
+                          <span style="font-weight: bold;">Symptôme :</span> {{eq.symptome}}
+                        </div>
+                      </div>
+                    </div>
+                  </agm-info-window>
+                </agm-marker>
+              </agm-marker-cluster>
+            </agm-map>
+          </div>
+        </div>
+      </nb-card-body>
+      <ngx-slide-out [showFilter]="showFilter">
+        <div class="row">
+          <div class="col-sm-12 mt-title">
+            <nb-toggle (checkedChange)="toggleCluster($event)">Regrouper</nb-toggle>
+          </div>
+        </div>
+        <hr />
+        <form [formGroup]="gmapFilterForm" (ngSubmit)="onSubmitFilter()">
+          <div class="row">
+            <div class="col-md-12">
+              <nb-select formControlName="selectedDR" size="tiny" (selectedChange)="changeDR($event)">
+                <nb-option value="">-- DR --</nb-option>
+                <nb-option *ngFor="let dr of listDR" value="{{dr.idt}}">{{dr.label}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nb-select formControlName="selectedDC" size="tiny">
+                <nb-option value="">-- DC --</nb-option>
+                <nb-option *ngFor="let dc of listDC" value="{{dc.idt}}">{{dc.label}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nb-select formControlName="selectedTypeEquipement" size="tiny" (selectedChange)="changeType($event)">
+                <nb-option value="">Mobile</nb-option>
+                <nb-option *ngFor="let t of listTypeEquipement" value="{{t}}">{{t}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <nb-select formControlName="selectedFournisseur" size="tiny">
+                <nb-option value="">-- Fournisseur --</nb-option>
+                <nb-option *ngFor="let f of listFournisseurs" value="{{f.idt}}">{{f.label}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+          <div *ngIf="showTechnologie" class="row">
+            <div class="col-md-12">
+              <nb-select formControlName="selectedTechnologie" size="tiny">
+                <nb-option value="">-- Technologie --</nb-option>
+                <nb-option *ngFor="let t of listTechnologies" value="{{t}}">{{t}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <button type="submit" nbButton status="primary" class="dashboard_csn-btn mt-btn-primary" size="small">
+                <nb-icon icon="search"></nb-icon>Chercher
+              </button>
+            </div>
+          </div>
+        </form>
+        <hr />
+        <div class="row">
+          <div class="col-sm-12 mt-title">
+            <nb-toggle [(ngModel)]="vueSatellite">Vue Satellite</nb-toggle>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- <table>
+              <thead><th>DR</th><th>Nombre</th></thead>
+              <tbody>
+                <tr *ngFor="let s of tabSynthese">
+                  <td>{{s.label}}</td>
+                  <td>{{s.nombre}}</td>
+                </tr>
+              </tbody>
+            </table> -->
+            <div class="today-details row">
+              <div *ngFor="let s of tabSynthese" class="col-sm-3">
+                <span class="caption parameter-name">{{s.label}}</span>
+                <span class="parameter-value">{{s.nombre}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ngx-slide-out>
+    </nb-card>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: gdos-ingress
+spec:
+  rules:
+  - host: gdos-uat.k8s-dev.iamdg.net.ma
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: gdos-front-service
+          servicePort: 80
+      - path: /gdos_invitation
+        backend:
+          serviceName: gdos-invitation-service
+          servicePort: 8080
+      - path: /gdos_appel
+        backend:
+          serviceName: gdos-appel-service
+          servicePort: 8080
+      - path: /gdos_dossier
+        backend:
+          serviceName: gdos-dossier-service
+          servicePort: 8080
+      - path: /gdos_email
+        backend:
+          serviceName: gdos-email-service
+          servicePort: 8080      

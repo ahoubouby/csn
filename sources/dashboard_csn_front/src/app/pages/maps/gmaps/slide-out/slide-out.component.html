@@ -1,0 +1,12 @@
+<nb-icon [icon]="showFilter ? 'corner-up-right-outline' : 'menu-2-outline'"
+         pack="eva"
+         class="show-hide-toggle"
+         (click)="toggleFilters()">
+</nb-icon>
+<div class="slide-out-container"
+     [class.expanded]="showFilter"
+     [class.collapsed]="!showFilter">
+  <div class="content-wrapper">
+    <ng-content></ng-content>
+  </div>
+</div>

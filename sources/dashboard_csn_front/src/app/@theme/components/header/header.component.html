@@ -1,0 +1,18 @@
+<div class="header-container">
+  <div class="logo-container">
+    <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+      <nb-icon icon="menu-2-outline"></nb-icon>
+    </a>
+    <a class="logo" href="#" (click)="navigateHome()" style="font-family: 'RobotoCondensed-Bold'"><span
+        style="color: #005CA7;">DASHBOARD</span><span style="color: rgb(0, 167, 28);">&nbsp;CSR</span></a>
+  </div>
+</div>
+
+<div class="header-container">
+  <nb-actions size="small">
+    <nb-action class="user-action" *nbIsGranted="['view', 'user']">
+      <ngx-custom-user [onlyPicture]="userPictureOnly" [name]="user?.name" [picture]="user?.picture">
+      </ngx-custom-user>
+    </nb-action>
+  </nb-actions>
+</div>

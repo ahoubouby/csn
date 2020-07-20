@@ -1,0 +1,13 @@
+<nb-card>
+  <nb-card-header class="customNbCardHeader">
+    Liste des incidents ouverts par activités
+  </nb-card-header>
+
+  <nb-card-body>
+    <div *ngIf="msgData">
+      <p class="text-warning">{{msgNoData}}</p>
+    </div>
+    <ng2-smart-table [settings]="settings" [source]="source">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

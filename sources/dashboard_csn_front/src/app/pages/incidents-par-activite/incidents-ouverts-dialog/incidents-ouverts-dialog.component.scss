@@ -1,0 +1,49 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  nb-card {
+    max-width: 100%;
+    max-height: 500px;
+    min-width: 600px;
+  }
+  nb-card-header, nb-card-footer {
+    padding: 0.5rem 1.25rem;
+  }
+}
+
+nb-select {
+  width: 100%;
+}
+
+::ng-deep nb-card-footer button[nbButton] {
+  margin-left: 1rem;
+}
+
+::ng-deep jaspero-confirmations .jaspero__confirmation_dialog {
+    max-width: 450px !important;
+    max-height: 30% !important;
+    position: fixed !important;
+}
+
+::ng-deep jaspero-confirmations .jaspero__confirmation_dialog-title {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    line-height: 34px;
+    margin-bottom: 20px;
+    padding: 24px 24px 0;
+    text-transform: capitalize;
+    background-color: lightskyblue;
+}
+
+::ng-deep jaspero-confirmations .jaspero__confirmation_dialog-actions .default {
+    background: #ec4a1d !important;
+}
+
+::ng-deep jaspero-confirmations .jaspero__confirmation_dialog-actions .primary {
+    background: #4d9e0b !important;
+}
+
+.customRoundShap {
+    border-radius: 0.5rem !important;
+}

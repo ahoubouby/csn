@@ -1,0 +1,73 @@
+<div class="row">
+  <nb-card class="col-md-6">
+    <nb-card-header class="text-center bg-warning text-white">
+      Cumul incidents {{(day != '')?'du '+ day + ' jusqu’à ' + hour: ''}}
+    </nb-card-header>
+    <nb-card-body>
+      <ngx-chart-incidents-ouvert-ferme-nombre></ngx-chart-incidents-ouvert-ferme-nombre>
+    </nb-card-body>
+  </nb-card>
+  <nb-card class="col-md-6">
+    <nb-card-header class="text-center bg-warning text-white">
+      Incidents durant une semaine
+    </nb-card-header>
+    <nb-card-body>
+      <ngx-chart-incidents-ci-etat-semaine></ngx-chart-incidents-ci-etat-semaine>
+    </nb-card-body>
+  </nb-card>
+</div>
+<div class="row">
+  <nb-card class="col-md-6">
+    <nb-card-header class="text-center bg-danger text-white">
+      Incidents Ouverts par Direction
+    </nb-card-header>
+    <nb-card-body>
+      <ngx-chart-incidents-ci-ouvert-direction></ngx-chart-incidents-ci-ouvert-direction>
+    </nb-card-body>
+  </nb-card>
+  <nb-card class="col-md-6">
+    <nb-card-header class="text-center bg-info text-white">
+      Incidents Fermés par Direction
+    </nb-card-header>
+    <nb-card-body>
+      <ngx-chart-incidents-ci-ferme-direction></ngx-chart-incidents-ci-ferme-direction>
+    </nb-card-body>
+  </nb-card>
+</div>
+<div class="row">
+  <nb-card class="col-md-6">
+    <nb-card-header class="text-center bg-danger text-white">
+      Incidents Ouverts par Direction bis
+    </nb-card-header>
+    <nb-card-body>
+      <ngx-chart-incidents-ci-ouvert-division-semaine></ngx-chart-incidents-ci-ouvert-division-semaine>
+    </nb-card-body>
+  </nb-card>
+  <nb-card class="col-md-6">
+    <nb-card-header class="text-center bg-info text-white">
+      Incidents Fermés par Direction bis
+    </nb-card-header>
+    <nb-card-body>
+      <ngx-chart-incidents-ci-ferme-division-semaine></ngx-chart-incidents-ci-ferme-division-semaine>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<div class="row">
+  <nb-card class="col-md-6">
+    <nb-card-header class="text-center bg-danger text-white">
+      Incidents Ouverts par Activité
+    </nb-card-header>
+    <nb-card-body>
+      <ngx-chart-incidents-ci-ouvert-activite-semaine></ngx-chart-incidents-ci-ouvert-activite-semaine>
+    </nb-card-body>
+  </nb-card>
+  <nb-card class="col-md-6">
+    <nb-card-header class="text-center bg-info text-white">
+      Incidents Fermés par Activité
+    </nb-card-header>
+    <nb-card-body>
+      <ngx-chart-incidents-ci-ferme-activite-semaine></ngx-chart-incidents-ci-ferme-activite-semaine>
+    </nb-card-body>
+  </nb-card>
+</div>

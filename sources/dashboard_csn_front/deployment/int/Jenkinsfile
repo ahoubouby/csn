@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+    tools { 
+        nodejs "diginodejs12131"
+    }
+    
+    stages {
+        stage('Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build -- --configuration=int'
+            }
+        }
+
+        stage('Deploy Image') {
+            steps{
+                step([$class: 'DockerBuilderPublisher', 
+                cleanImages: false, 
+                cleanupWithJenkinsJobDelete: false, 
+                cloud: 'docker', 
+                dockerFileDirectory: '.', 
+                pushCredentialsId: 'sal-images-deployer', 
+                pushOnSuccess: true, 
+                tagsString: 'sal-container-registry.k8s-dev.iamdg.net.ma/dash_front:0.0.0-int-1.0']
+                )
+            }  
+        }
+
+        stage('Deploy to k8s cluster') {
+            steps {
+                withKubeConfig([credentialsId: 'sal-k8s',
+                serverUrl: 'https://10.80.246.11:6443',
+                contextName: 'sal-ms',
+                clusterName: 'k8s-digi-dev.devops',
+                namespace: 'sal-ms'
+                ]){
+                    script {
+                        try {
+                            sh 'kubectl apply -f deployment/int/kube-config/dash_front_deployment.yaml'
+                        } catch (error) {
+                            sh 'kubectl create -f deployment/int/kube-config/dash_front_deployment.yaml'
+                        }
+                        try {
+                            sh 'kubectl apply -f deployment/int/kube-config/dash_front_service.yaml'
+                        } catch (error) {
+                            sh 'kubectl create -f deployment/int/kube-config/dash_front_service.yaml'
+                        }
+                        try {
+                            sh 'kubectl apply -f deployment/int/kube-config/dash_front_ingress.yaml'
+                        } catch (error) {
+                            sh 'kubectl create -f deployment/int/kube-config/dash_front_ingress.yaml'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

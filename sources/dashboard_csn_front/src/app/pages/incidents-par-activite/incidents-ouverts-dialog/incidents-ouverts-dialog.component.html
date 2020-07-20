@@ -1,0 +1,64 @@
+<form [formGroup]="incidentCommentForm" (ngSubmit)="saveIncident()">
+  <nb-card>
+    <jaspero-confirmations [defaultSettings]="optionsConfirm"></jaspero-confirmations>
+    <nb-card-header class="text-justify dialogHeader">
+      Ajouter Commentaire
+    </nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="label col-sm-6 col-form-label">Date : </label>
+            <div class="col-sm-6">
+              {{incident.jour}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="label col-sm-6 col-form-label">Activité : </label>
+            <div class="col-sm-6">
+              {{incident.activite}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="label col-sm-6 col-form-label">Nombre : </label>
+            <div class="col-sm-6">
+              {{incident.nombre}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="label col-sm-6 col-form-label">Commentaire : </label>
+            <div class="col-sm-6">
+              {{incident.commentaire}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group row">
+            <textarea class="customRoundShap" rows="3" formControlName="newComment" nbInput fullWidth shape="round"
+              placeholder="Nouveau commentaire"></textarea>
+            <div class="col-sm-8">
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+    <nb-card-footer class="text-right">
+      <button nbButton status="success" size="small" type="submit">Enregistrer</button>
+      <button nbButton hero status="danger" size="small" (click)="dismiss()">Fermer</button>
+    </nb-card-footer>
+  </nb-card>
+</form>

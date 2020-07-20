@@ -1,0 +1,5 @@
+cd dashboard_csn_job_ms
+>mvn clean install -DskipTests
+
+cd dashboard_csn_job_service
+>mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=10000'

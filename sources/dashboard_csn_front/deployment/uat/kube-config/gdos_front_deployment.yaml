@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gdos-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gdos-front
+  template:
+    metadata:
+      labels:
+        app: gdos-front
+    spec:
+      containers:
+      - name: gdos-front
+        image: sal-container-registry.k8s-dev.iamdg.net.ma/gdos_front:0.0.0-uat-1.0
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "1Gi"
+          requests:
+            memory: "1Gi"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: regcred

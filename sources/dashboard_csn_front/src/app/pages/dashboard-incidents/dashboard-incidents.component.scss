@@ -1,0 +1,107 @@
+@import '/../../@theme/styles/themes';
+@include nb-install-component() {
+  ngx-d3-bar,
+  ngx-d3-pie,
+  ngx-d3-advanced-pie,
+  ngx-d3-area-stack,
+  ngx-d3-line,
+  ngx-d3-polar {
+    display: block;
+    width: 100%;
+    height: nb-theme(card-height-medium);
+
+    /deep/ {
+      .pie-label {
+        fill: nb-theme(color-fg-heading);
+      }
+
+      .grid-line-path {
+        stroke: nb-theme(separator);
+      }
+
+      text {
+        fill: nb-theme(color-fg-heading);
+      }
+
+      .chart-legend {
+        .legend-labels {
+          background: nb-theme(color-bg);
+        }
+        .legend-label {
+          color: nb-theme(color-fg-heading);
+          .active .legend-label-text {
+            color: nb-theme(color-fg-heading);
+          }
+        }
+      }
+    }
+  }
+
+  ngx-echarts-pie,
+  ngx-echarts-bar,
+  ngx-echarts-line,
+  ngx-echarts-multiple-xaxis,
+  ngx-echarts-area-stack,
+  ngx-echarts-bar-animation,
+  ngx-echarts-radar {
+    display: block;
+    height: nb-theme(card-height-medium);
+    width: 100%;
+  }
+
+  ::ng-deep .echart {
+    height: 100%;
+    width: 100%;
+  }
+
+  ngx-chartjs-pie,
+  ngx-chartjs-bar,
+  ngx-chartjs-line,
+  ngx-chartjs-multiple-xaxis,
+  ngx-chartjs-bar-horizontal,
+  ngx-chartjs-radar {
+    display: block;
+    height: nb-theme(card-height-medium);
+    width: 100%;
+
+    ::ng-deep chart {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+::ng-deep ngx-dashboard-incidents .row nb-card {
+  margin-bottom: 8px;
+  min-height: 270px;
+}
+
+::ng-deep ngx-dashboard-incidents .row nb-card nb-card-header {
+  padding: 3px;
+}
+
+::ng-deep .echart-commembert {
+  max-height: 340px;
+}
+::ng-deep ngx-dashboard-incidents .row {
+  display: flex;
+}
+
+::ng-deep ngx-dashboard-incidents .row nb-card {
+  flex: 1;
+  flex-direction: column;
+  padding: 0;
+}
+::ng-deep ngx-dashboard-incidents .row nb-card {
+  margin: 7px;
+}
+// @media (min-width: 1024px) {
+//   ::ng-deep ngx-dashboard-incidents .row nb-card:first-child {
+//     margin: 7px 0 7px 15px;
+//   }
+
+//   ::ng-deep ngx-dashboard-incidents .row nb-card:last-child {
+//     margin: 7px 15px 7px 0;
+//   }
+// }

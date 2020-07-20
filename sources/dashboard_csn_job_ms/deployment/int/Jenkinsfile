@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+    tools { 
+        maven 'Maven 3.6'
+        jdk 'Java_home' 
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile -Pint -DskipTests -U '
+            }
+        }
+/*         stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Analyse statique de code') {
+            steps {
+                withSonarQubeEnv(credentialsId: 'f104fd63-2175-4da1-b9ea-162343e96b0c', installationName: 'SonarQube') { 
+                sh 'mvn sonar:sonar'
+                }
+            }
+        } */
+        stage('Delivery') {
+            steps {
+                sh 'mvn package -DskipTests -Pint' 
+            }
+        }
+        stage('Deploy Image') {
+            steps{
+                step([$class: 'DockerBuilderPublisher', 
+                cleanImages: false, 
+                cleanupWithJenkinsJobDelete: false, 
+                cloud: 'docker', 
+                dockerFileDirectory: '.', 
+                pushCredentialsId: 'sal-images-deployer', 
+                pushOnSuccess: true, 
+                tagsString: 'sal-container-registry.k8s-dev.iamdg.net.ma/dashboard_csn:0.0.0-int-1.0'])
+            }
+        }
+        stage('Deploy to k8s cluster') {
+            steps {
+                withKubeConfig([credentialsId: 'sal-k8s',
+                serverUrl: 'https://10.80.246.11:6443',
+                contextName: 'sal-ms',
+                clusterName: 'k8s-digi-dev.devops',
+                namespace: 'sal-ms'
+                ]) {
+                    script {
+                        try {
+                            sh 'kubectl apply -f deployment/int/kube-config/dashboard_csn_job_deployment.yaml'
+                        } catch (error) {
+                            sh 'kubectl create -f deployment/int/kube-config/dashboard_csn_job_deployment.yaml'
+                        }
+                        try {
+                            sh 'kubectl apply -f deployment/int/kube-config/dashboard_csn_job_job_service.yaml'
+                        } catch (error) {
+                            sh 'kubectl create -f deployment/int/kube-config/dashboard_csn_job_job_service.yaml'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
